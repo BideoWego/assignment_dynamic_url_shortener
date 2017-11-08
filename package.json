@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "console": "node repl.js",
     "c": "node repl.js"
   },
@@ -30,6 +30,7 @@
     "express-handlebars": "^3.0.0",
     "express-method-override-get-post-support": "0.0.7",
     "load-helpers": "^1.0.1",
+    "lodash": "^4.17.4",
     "method-override": "^2.3.10",
     "moment": "^2.19.1",
     "morgan": "^1.9.0",

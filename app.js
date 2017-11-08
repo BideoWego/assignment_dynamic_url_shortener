@@ -82,13 +82,54 @@ app.use(morganToolkit());
 // Models
 // ----------------------------------------
 const models = require('./models');
+const {
+  URL,
+  Click
+} = models;
 
 
 // ----------------------------------------
 // Routes
 // ----------------------------------------
-app.get('/', (req, res, next) => {
-  res.render('welcome/index');
+app.get('/', async (req, res, next) => {
+  try {
+    const urls = await URL.all();
+
+    urls.forEach(async url => {
+      url.clicks = await Click.findByUrlId(url.id);
+    });
+
+    res.render('welcome/index', { urls });
+  } catch (e) {
+    next(e);
+  }
+});
+
+
+app.get('/:shortUrl', async (req, res, next) => {
+  try {
+    const shortUrl = req.params.shortUrl;
+    const url = await URL.findByShortUrl(shortUrl);
+
+    await Click.create({
+      urlId: url.id,
+      referrer: req.session.backUrl
+    });
+
+    res.redirect(url.url);
+  } catch (e) {
+    next(e);
+  }
+});
+
+
+app.post('/urls', async (req, res, next) => {
+  try {
+    await URL.create({ url: req.body.url });
+    res.redirect('/');
+  } catch (e) {
+    next(e);
+  }
 });
 
 

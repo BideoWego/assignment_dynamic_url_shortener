@@ -42,14 +42,23 @@ const createRedisHelpers = (modelName, redis) => {
 };
 
 
-const URL = require('./url')(client, createRedisHelpers('urls', client));
-const Click = require('./click')(client, createRedisHelpers('clicks', client));
+const ShortURL = require('./short_url')(client);
+const URL = require('./url')(
+  client,
+  createRedisHelpers('urls', client),
+  ShortURL
+);
+const Click = require('./click')(
+  client,
+  createRedisHelpers('clicks', client)
+);
 
 
 module.exports = {
   redis: client,
   URL,
-  Click
+  Click,
+  ShortURL
 };
 
 
