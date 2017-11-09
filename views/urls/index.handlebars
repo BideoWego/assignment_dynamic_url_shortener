@@ -1,6 +1,4 @@
-<header class="page-header">
-  <h1>Dynamic URL Shortener</h1>
-</header>
+
 
 <h2>Create a Shortened URL</h2>
 <form action="/urls" method="post">
@@ -14,12 +12,18 @@
 </form>
 
 
+<header class="page-header">
+  <h2>URLs</h2>
+</header>
+
+
 {{#if (isEmpty urls) }}
   <p class="text-danger">No URLs</p>
 {{else }}
   <table class="table">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Original URL</th>
         <th>Created At</th>
         <th>Short URL</th>
@@ -29,10 +33,15 @@
     <tbody>
       {{#each urls as |url| }}
         <tr>
+          <td>{{ url.id }}</td>
           <td><a href="{{ url.url }}">{{ url.url }}</a></td>
           <td>{{ url.createdAt }}</td>
           <td><a href="/{{ url.shortUrl }}">{{ url.shortUrl }}</a></td>
-          <td data-url-id="{{ url.id }}">{{ url.clicks.length }}</td>
+          <td data-url-id="{{ url.id }}">
+            <a href="/urls/{{ url.id }}">
+              {{ url.clicks.length }}
+            </a>
+          </td>
         </tr>
       {{/each }}
     </tbody>

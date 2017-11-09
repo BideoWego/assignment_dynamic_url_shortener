@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-      Application Name
+      {{ appName }}
       {{#if title }}
         | {{ title }}
       {{/if }}
@@ -26,6 +26,10 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body data-base-url="{{ baseUrl }}">
+    <header class="page-header text-center">
+      <h1>Dynamic URL Shortener</h1>
+    </header>
+
     <main class="container">
       {{{ body }}}
     </main>

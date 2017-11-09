@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.locals.appName = 'Dynamic URL Shortener';
 
 
 // ----------------------------------------
@@ -110,7 +111,7 @@ app.get('/', async (req, res, next) => {
       url.clicks = await Click.findByUrlId(url.id);
     });
 
-    res.render('welcome/index', { urls });
+    res.render('urls/index', { urls });
   } catch (e) {
     next(e);
   }
@@ -131,6 +132,18 @@ app.get('/:shortUrl', async (req, res, next) => {
     io.sockets.emit('click', url.id, clicks.length);
 
     res.redirect(url.url);
+  } catch (e) {
+    next(e);
+  }
+});
+
+
+app.get('/urls/:id', async (req, res, next) => {
+  try {
+    const url = await URL.find(req.params.id);
+    const clicks = await Click.findByUrlId(url.id);
+
+    res.render('urls/show', { url, clicks });
   } catch (e) {
     next(e);
   }

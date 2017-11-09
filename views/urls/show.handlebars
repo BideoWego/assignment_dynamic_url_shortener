@@ -1,0 +1,37 @@
+<header class="page-header">
+  <h2>Details for URL: {{ url.url }}</h2>
+  <p>Created At: {{ url.createdAt }}</p>
+  <p>Short URL: {{ url.shortUrl }}</p>
+  <a href="/">Back to URLs</a>
+</header>
+
+
+<header class="page-header">
+  <h2>Clicks</h2>
+</header>
+
+
+{{#if (isEmpty clicks) }}
+  <p class="text-danger">No Clicks</p>
+{{else }}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Referrer</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each clicks as |click| }}
+        <tr>
+          <td>{{ click.id }}</td>
+          <td>{{ click.referrer }}</td>
+          <td>{{ click.createdAt }}</td>
+        </tr>
+      {{/each }}
+    </tbody>
+  </table>
+{{/if }}
+
+
