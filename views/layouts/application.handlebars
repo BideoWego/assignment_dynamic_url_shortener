@@ -21,11 +21,17 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
   </head>
-  <body>
+  <body data-base-url="{{ baseUrl }}">
     <main class="container">
       {{{ body }}}
     </main>
+
+    <!-- My Socket -->
+    <script src="/assets/javascripts/socket.js"></script>
   </body>
 </html>
 

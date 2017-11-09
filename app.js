@@ -3,6 +3,17 @@ const app = express();
 
 
 // ----------------------------------------
+// Socket.io
+// ----------------------------------------
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+app.use('/socket.io', express.static(
+ `${ __dirname }node_modules/socket.io-client/dist/`
+));
+
+
+// ----------------------------------------
 // ENV
 // ----------------------------------------
 if (process.env.NODE_ENV !== 'production') {
@@ -116,6 +127,9 @@ app.get('/:shortUrl', async (req, res, next) => {
       referrer: req.session.backUrl
     });
 
+    const clicks = await Click.findByUrlId(url.id);
+    io.sockets.emit('click', url.id, clicks.length);
+
     res.redirect(url.url);
   } catch (e) {
     next(e);
@@ -171,7 +185,8 @@ args.push(() => {
 });
 
 if (require.main === module) {
-  app.listen.apply(app, args);
+  app.locals.baseUrl = `http://${ host }:${ port }`;
+  server.listen.apply(server, args);
 }
 
 

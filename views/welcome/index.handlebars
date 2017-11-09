@@ -32,7 +32,7 @@
           <td><a href="{{ url.url }}">{{ url.url }}</a></td>
           <td>{{ url.createdAt }}</td>
           <td><a href="/{{ url.shortUrl }}">{{ url.shortUrl }}</a></td>
-          <td>{{ url.clicks.length }}</td>
+          <td data-url-id="{{ url.id }}">{{ url.clicks.length }}</td>
         </tr>
       {{/each }}
     </tbody>
