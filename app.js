@@ -10,7 +10,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 app.use('/socket.io', express.static(
- `${ __dirname }node_modules/socket.io-client/dist/`
+ `${ __dirname }/node_modules/socket.io-client/dist/`
 ));
 
 
