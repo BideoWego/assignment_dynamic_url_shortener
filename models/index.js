@@ -1,4 +1,3 @@
-const bluebird = require('bluebird');
 const redis = require('async-redis');
 const client = redis.createClient({ port: process.env.REDIS_PORT || 6379 });
 
